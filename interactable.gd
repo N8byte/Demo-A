@@ -15,7 +15,7 @@ var sunk := false
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_action("interact") and player_here and event.is_pressed():
+	if event is InputEventKey and event.is_action_pressed("interact") and player_here:
 		if %AnimationPlayer.is_playing():
 			return
 		if (sunk):
@@ -30,12 +30,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.name == &'CharacterBody3D':
+	if body == %player1:
 		%Label3D.visible = true
 		player_here = true
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.name == &'CharacterBody3D':
+	if body == %player1:
 		%Label3D.visible = false
 		player_here = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm7jlulty3tl7"]
+[gd_scene load_steps=32 format=3 uid="uid://dm7jlulty3tl7"]
 
 [ext_resource type="Script" uid="uid://b31xnwn3jivpv" path="res://interactable.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dv0hrgows8vb5" path="res://character_body_3d.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://c16movw1cykl6" path="res://wardrobe.gd" id="3_h2yge"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
-albedo_color = Color(0.22745098, 0.6156863, 0.14901961, 1)
+albedo_color = Color(0.24264768, 0.35168687, 0.16421476, 1)
 metallic_specular = 0.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
@@ -84,17 +85,197 @@ _data = {
 &"sink": SubResource("Animation_0xm2m")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dm0k"]
+[sub_resource type="Animation" id="Animation_5vw27"]
+resource_name = "go_to_wardrobe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.4640856, 1),
+"update": 0,
+"values": [Vector3(0, 7, 3), Vector3(-5, 2, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.4640856, 1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0), Vector3(0, -1.3089969, 0)]
+}
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ig7tw"]
+[sub_resource type="Animation" id="Animation_kek77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 7, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4c57u"]
+_data = {
+&"RESET": SubResource("Animation_kek77"),
+&"go_to_wardrobe": SubResource("Animation_5vw27")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0.33755314, 0.17970005, 9.62615e-08, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+radius = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+size = Vector3(0.085, 2, 0.785)
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_door_pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.09807308, 1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0), Vector3(0, -0.7853982, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("right_door_pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.1538932, 1),
+"update": 0,
+"values": [Vector3(0, -1.3089969, 0), Vector3(0, 1.3089969, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_door_pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("right_door_pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.3089969, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_272bh"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_door_pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.17677678, -2),
+"update": 0,
+"values": [Vector3(0, -0.7853982, 0), Vector3(0, 1.5707964, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("right_door_pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 1),
+"transitions": PackedFloat32Array(0.8122524, 0.5, -2.8284268),
+"update": 0,
+"values": [Vector3(0, 1.3089969, 0), Vector3(0, -1.5707964, 0), Vector3(0, -1.3089969, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
+_data = {
+&"RESET": SubResource("Animation_7mycd"),
+&"close": SubResource("Animation_272bh"),
+&"open": SubResource("Animation_lquwl")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 0.3019608)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.12591082, 0.12591085, 0.12591076, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dm0k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+metallic_specular = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ig7tw"]
+
 [node name="Node3D" type="Node3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="floor" type="CSGBox3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7dm0k")
 use_collision = true
 size = Vector3(10, 1, 10)
@@ -102,17 +283,17 @@ size = Vector3(10, 1, 10)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="elevator" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -4)
 use_collision = true
 script = ExtResource("1_0xm2m")
 
-[node name="Area3D" type="Area3D" parent="CSGCylinder3D"]
+[node name="Area3D" type="Area3D" parent="elevator"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="elevator/Area3D"]
 shape = SubResource("SphereShape3D_ig7tw")
 
-[node name="Label3D" type="Label3D" parent="CSGCylinder3D"]
+[node name="Label3D" type="Label3D" parent="elevator"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7744389, 0)
 visible = false
@@ -122,43 +303,236 @@ text = "Press E to interact"
 font_size = 72
 outline_size = 24
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CSGCylinder3D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="elevator"]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_1bvp3")
 }
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.7071068, 0.7071067, 0, 7, 3)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 7, 3)
 current = true
-fov = 80.0
+fov = 70.0
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-script = ExtResource("1_ig7tw")
+[node name="camera_animations" type="AnimationPlayer" parent="Camera3D"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_4c57u")
+}
+playback_default_blend_time = 0.2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_7dm0k")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("CapsuleMesh_ig7tw")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="floating cube" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.4, -4.5)
 use_collision = true
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="falling cube" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 4, -4.6000004)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="falling cube"]
 shape = SubResource("BoxShape3D_7dm0k")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="falling cube"]
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710677, 0.68301266, -0.18301272, 0, 0.25881907, 0.9659258, 0.70710677, -0.68301266, 0.18301272, 0, 10, 0)
 shadow_enabled = true
 
-[connection signal="body_entered" from="CSGCylinder3D/Area3D" to="CSGCylinder3D" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="CSGCylinder3D/Area3D" to="CSGCylinder3D" method="_on_area_3d_body_exited"]
+[node name="wardrobe" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 1.5, -4.15)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+use_collision = true
+size = Vector3(1.6, 2, 0.7)
+script = ExtResource("3_h2yge")
+
+[node name="Area3D" type="Area3D" parent="wardrobe"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wardrobe/Area3D"]
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="wardrobe_label" type="Label3D" parent="wardrobe"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4000001, 0)
+visible = false
+billboard = 1
+text = "Press E to interact"
+font_size = 72
+outline_size = 24
+
+[node name="left_door_pivot" type="Node3D" parent="wardrobe"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.79999995, 0, 0.39999986)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wardrobe/left_door_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.38)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("../..")
+
+[node name="right_door_pivot" type="Node3D" parent="wardrobe"]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 0.8000001, 0, 0.39999986)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wardrobe/right_door_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.365)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("../..")
+
+[node name="negative" type="CSGBox3D" parent="wardrobe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1920929e-07, 0.1500001)
+operation = 2
+size = Vector3(1.2, 1.6, 0.7)
+
+[node name="wardrobe_animations" type="AnimationPlayer" parent="wardrobe"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_272bh")
+}
+playback_default_blend_time = 0.2
+
+[node name="color_select_ui" type="CenterContainer" parent="wardrobe"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 634.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="wardrobe/color_select_ui"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="wardrobe/color_select_ui/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="wardrobe/color_select_ui"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer"]
+layout_mode = 2
+text = "Select your color"
+label_settings = SubResource("LabelSettings_h2yge")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="wardrobe/color_select_ui/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Here's your color
+asdf
+asdf"
+color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+edit_alpha = false
+edit_intensity = false
+
+[node name="PanelContainer" type="PanelContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="color_panel" type="Panel" parent="wardrobe/color_select_ui/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1bvp3")
+
+[node name="red_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/red_container"]
+layout_mode = 2
+text = "Red:"
+
+[node name="red_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/red_container"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.9
+
+[node name="green_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/green_container"]
+layout_mode = 2
+text = "Green:"
+
+[node name="green_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/green_container"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.9
+
+[node name="blue_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/blue_container"]
+layout_mode = 2
+text = "Blue:"
+
+[node name="blue_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/blue_container"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.9
+
+[node name="MarginContainer2" type="MarginContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+
+[node name="LineEdit" type="LineEdit" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "You"
+
+[node name="MarginContainer" type="MarginContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="color_select_ui_done" type="Button" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Done"
+
+[node name="player1" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player1"]
+shape = SubResource("CapsuleShape3D_7dm0k")
+
+[node name="player_mesh" type="MeshInstance3D" parent="player1"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CapsuleMesh_ig7tw")
+
+[node name="player_label" type="Label3D" parent="player1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+billboard = 1
+text = "You"
+
+[connection signal="body_entered" from="elevator/Area3D" to="elevator" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="elevator/Area3D" to="elevator" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="wardrobe/Area3D" to="wardrobe" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="wardrobe/Area3D" to="wardrobe" method="_on_area_3d_body_exited"]
+[connection signal="ready" from="wardrobe/color_select_ui/VBoxContainer/PanelContainer/color_panel" to="wardrobe" method="_on_color_panel_ready"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/red_container/red_slider" to="wardrobe" method="_on_red_slider_value_changed"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/green_container/green_slider" to="wardrobe" method="_on_green_slider_value_changed"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/blue_container/blue_slider" to="wardrobe" method="_on_blue_slider_value_changed"]
+[connection signal="text_changed" from="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit" to="wardrobe" method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="wardrobe/color_select_ui/VBoxContainer/MarginContainer/color_select_ui_done" to="wardrobe" method="_on_color_select_ui_done_pressed"]
+[connection signal="ready" from="player1/player_mesh" to="wardrobe" method="_on_player_mesh_ready"]
