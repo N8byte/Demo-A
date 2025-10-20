@@ -1,8 +1,43 @@
-[gd_scene load_steps=32 format=3 uid="uid://dm7jlulty3tl7"]
+[gd_scene load_steps=40 format=3 uid="uid://dm7jlulty3tl7"]
 
 [ext_resource type="Script" uid="uid://b31xnwn3jivpv" path="res://interactable.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://dv0hrgows8vb5" path="res://character_body_3d.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dv0hrgows8vb5" path="res://player.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c16movw1cykl6" path="res://wardrobe.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dnxpohe23y22x" path="res://halo.png" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bn64eddegg08f" path="res://icon.svg" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://d8al5rj2wabc" path="res://Pasted image.png" id="6_7mycd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dm0k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+metallic_specular = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(1, 1, 0, 1)
+disable_receive_shadows = true
+grow = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_color = Color(0.14364603, 0.063081704, 3.008172e-08, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7mycd"]
+top_radius = 0.7
+bottom_radius = 0.7
+height = 0.01
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_272bh"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
 albedo_color = Color(0.24264768, 0.35168687, 0.16421476, 1)
@@ -27,6 +62,10 @@ sky = SubResource("Sky_ig7tw")
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.16
 ambient_light_energy = 0.22
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+albedo_color = Color(1, 0.8509804, 0.5176471, 1)
+metallic_specular = 0.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
 radius = 1.9926101
@@ -62,54 +101,10 @@ tracks/0/keys = {
 "values": [Vector3(4, -0.2, -4), Vector3(4, 1, -4)]
 }
 
-[sub_resource type="Animation" id="Animation_0xm2m"]
-resource_name = "sink"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(4, 1, -4), Vector3(4, -0.2, -4)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1bvp3"]
 _data = {
 &"RESET": SubResource("Animation_h2yge"),
-&"rise": SubResource("Animation_1bvp3"),
-&"sink": SubResource("Animation_0xm2m")
-}
-
-[sub_resource type="Animation" id="Animation_5vw27"]
-resource_name = "go_to_wardrobe"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-1.4640856, 1),
-"update": 0,
-"values": [Vector3(0, 7, 3), Vector3(-5, 2, -1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-1.4640856, 1),
-"update": 0,
-"values": [Vector3(-0.7853982, 0, 0), Vector3(0, -1.3089969, 0)]
+&"rise": SubResource("Animation_1bvp3")
 }
 
 [sub_resource type="Animation" id="Animation_kek77"]
@@ -139,9 +134,64 @@ tracks/1/keys = {
 "values": [Vector3(-0.7853982, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4c57u"]
+resource_name = "go_to_elevator"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.9318725, 1),
+"update": 0,
+"values": [Vector3(0, 7, 3), Vector3(3, 4, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.9318725, 1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0), Vector3(-0.26179937, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5vw27"]
+resource_name = "go_to_wardrobe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.4640856, 1),
+"update": 0,
+"values": [Vector3(0, 7, 3), Vector3(-5, 2, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.4640856, 1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0), Vector3(0, -1.3089969, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4c57u"]
 _data = {
 &"RESET": SubResource("Animation_kek77"),
+&"go_to_elevator": SubResource("Animation_4c57u"),
 &"go_to_wardrobe": SubResource("Animation_5vw27")
 }
 
@@ -157,33 +207,6 @@ radius = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 size = Vector3(0.085, 2, 0.785)
-
-[sub_resource type="Animation" id="Animation_lquwl"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("left_door_pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.09807308, 1),
-"update": 0,
-"values": [Vector3(0, 1.5707964, 0), Vector3(0, -0.7853982, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("right_door_pivot:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.1538932, 1),
-"update": 0,
-"values": [Vector3(0, -1.3089969, 0), Vector3(0, 1.3089969, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_7mycd"]
 length = 0.001
@@ -239,6 +262,33 @@ tracks/1/keys = {
 "values": [Vector3(0, 1.3089969, 0), Vector3(0, -1.5707964, 0), Vector3(0, -1.3089969, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_door_pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.09807308, 1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0), Vector3(0, -0.7853982, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("right_door_pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.1538932, 1),
+"update": 0,
+"values": [Vector3(0, -1.3089969, 0), Vector3(0, 1.3089969, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
 _data = {
 &"RESET": SubResource("Animation_7mycd"),
@@ -265,15 +315,54 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dm0k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
-metallic_specular = 0.2
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ig7tw"]
-
 [node name="Node3D" type="Node3D"]
+
+[node name="player1" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player1"]
+shape = SubResource("CapsuleShape3D_7dm0k")
+
+[node name="player_mesh" type="MeshInstance3D" parent="player1"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CapsuleMesh_ig7tw")
+
+[node name="player_label" type="Label3D" parent="player1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+billboard = 1
+no_depth_test = true
+text = "You"
+
+[node name="player_hats" type="Node3D" parent="player1"]
+unique_name_in_owner = true
+
+[node name="halo" type="CSGTorus3D" parent="player1/player_hats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_1bvp3")
+cast_shadow = 0
+inner_radius = 0.229
+outer_radius = 0.294
+sides = 16
+
+[node name="cowboy" type="Node3D" parent="player1/player_hats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9000001, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player1/player_hats/cowboy"]
+material_override = SubResource("StandardMaterial3D_lquwl")
+mesh = SubResource("CylinderMesh_7mycd")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="player1/player_hats/cowboy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = SubResource("StandardMaterial3D_lquwl")
+mesh = SubResource("CylinderMesh_272bh")
+skeleton = NodePath("../..")
 
 [node name="floor" type="CSGBox3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7dm0k")
@@ -285,6 +374,7 @@ environment = SubResource("Environment_0xm2m")
 
 [node name="elevator" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -4)
+material_override = SubResource("StandardMaterial3D_7mycd")
 use_collision = true
 script = ExtResource("1_0xm2m")
 
@@ -299,6 +389,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7744389, 0)
 visible = false
 billboard = 1
 double_sided = false
+no_depth_test = true
 text = "Press E to interact"
 font_size = 72
 outline_size = 24
@@ -310,7 +401,7 @@ libraries = {
 }
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 7, 3)
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 7, 3)
 current = true
 fov = 70.0
 
@@ -323,6 +414,7 @@ playback_default_blend_time = 0.2
 
 [node name="floating cube" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.4, -4.5)
+material_override = SubResource("StandardMaterial3D_7mycd")
 use_collision = true
 
 [node name="falling cube" type="RigidBody3D" parent="."]
@@ -332,6 +424,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 4, -4.6000004)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="falling cube"]
+material_override = SubResource("StandardMaterial3D_7mycd")
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="sun" type="DirectionalLight3D" parent="."]
@@ -355,6 +448,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4000001, 0)
 visible = false
 billboard = 1
+no_depth_test = true
 text = "Press E to interact"
 font_size = 72
 outline_size = 24
@@ -402,23 +496,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="wardrobe/color_select_ui"]
-custom_minimum_size = Vector2(700, 500)
+[node name="background" type="PanelContainer" parent="wardrobe/color_select_ui"]
+custom_minimum_size = Vector2(700, 700)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="wardrobe/color_select_ui/PanelContainer"]
+[node name="Panel" type="Panel" parent="wardrobe/color_select_ui/background"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="wardrobe/color_select_ui"]
+[node name="TabContainer" type="TabContainer" parent="wardrobe/color_select_ui"]
 layout_mode = 2
+current_tab = 0
 
-[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="Color & name" type="VBoxContainer" parent="wardrobe/color_select_ui/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 layout_mode = 2
 text = "Select your color"
 label_settings = SubResource("LabelSettings_h2yge")
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 visible = false
 layout_mode = 2
 text = "Here's your color
@@ -428,111 +527,143 @@ color = Color(0.8431839, 0.8431839, 0.84318376, 1)
 edit_alpha = false
 edit_intensity = false
 
-[node name="PanelContainer" type="PanelContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 
-[node name="color_panel" type="Panel" parent="wardrobe/color_select_ui/VBoxContainer/PanelContainer"]
+[node name="color_panel" type="Panel" parent="wardrobe/color_select_ui/TabContainer/Color & name/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bvp3")
 
-[node name="red_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="red_container" type="HBoxContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/red_container"]
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/TabContainer/Color & name/red_container"]
 layout_mode = 2
 text = "Red:"
 
-[node name="red_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/red_container"]
+[node name="red_slider" type="HSlider" parent="wardrobe/color_select_ui/TabContainer/Color & name/red_container"]
 custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.9
 
-[node name="green_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="green_container" type="HBoxContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/green_container"]
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/TabContainer/Color & name/green_container"]
 layout_mode = 2
 text = "Green:"
 
-[node name="green_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/green_container"]
+[node name="green_slider" type="HSlider" parent="wardrobe/color_select_ui/TabContainer/Color & name/green_container"]
 custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.9
 
-[node name="blue_container" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="blue_container" type="HBoxContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/blue_container"]
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/TabContainer/Color & name/blue_container"]
 layout_mode = 2
 text = "Blue:"
 
-[node name="blue_slider" type="HSlider" parent="wardrobe/color_select_ui/VBoxContainer/blue_container"]
+[node name="blue_slider" type="HSlider" parent="wardrobe/color_select_ui/TabContainer/Color & name/blue_container"]
 custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.9
 
-[node name="MarginContainer2" type="MarginContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Name: "
 
-[node name="LineEdit" type="LineEdit" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "You"
 
-[node name="MarginContainer" type="MarginContainer" parent="wardrobe/color_select_ui/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="wardrobe/color_select_ui/TabContainer/Color & name"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="color_select_ui_done" type="Button" parent="wardrobe/color_select_ui/VBoxContainer/MarginContainer"]
+[node name="color_select_ui_done" type="Button" parent="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
 text = "Done"
 
-[node name="player1" type="CharacterBody3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-script = ExtResource("1_ig7tw")
+[node name="Hats" type="VBoxContainer" parent="wardrobe/color_select_ui/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+metadata/_tab_index = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="player1"]
-shape = SubResource("CapsuleShape3D_7dm0k")
+[node name="ScrollContainer" type="ScrollContainer" parent="wardrobe/color_select_ui/TabContainer/Hats"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
 
-[node name="player_mesh" type="MeshInstance3D" parent="player1"]
-unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_h2yge")
-mesh = SubResource("CapsuleMesh_ig7tw")
+[node name="ItemList" type="ItemList" parent="wardrobe/color_select_ui/TabContainer/Hats/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 24
+item_count = 3
+max_columns = 3
+same_column_width = true
+icon_mode = 0
+fixed_icon_size = Vector2i(115, 115)
+item_0/text = "None"
+item_0/icon = ExtResource("5_7mycd")
+item_1/text = "Halo"
+item_1/icon = ExtResource("4_lquwl")
+item_2/text = "Cowboy"
+item_2/icon = ExtResource("6_7mycd")
 
-[node name="player_label" type="Label3D" parent="player1"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-billboard = 1
-text = "You"
+[node name="MarginContainer" type="MarginContainer" parent="wardrobe/color_select_ui/TabContainer/Hats"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/margin_top = 8
 
+[node name="hats_ui_done" type="Button" parent="wardrobe/color_select_ui/TabContainer/Hats/MarginContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Done"
+
+[node name="boundary" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.5)
+visible = false
+use_collision = true
+size = Vector3(13, 7, 12)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="boundary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+operation = 2
+size = Vector3(11, 7, 10)
+
+[connection signal="ready" from="player1/player_mesh" to="wardrobe" method="_on_player_mesh_ready"]
 [connection signal="body_entered" from="elevator/Area3D" to="elevator" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="elevator/Area3D" to="elevator" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="wardrobe/Area3D" to="wardrobe" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="wardrobe/Area3D" to="wardrobe" method="_on_area_3d_body_exited"]
-[connection signal="ready" from="wardrobe/color_select_ui/VBoxContainer/PanelContainer/color_panel" to="wardrobe" method="_on_color_panel_ready"]
-[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/red_container/red_slider" to="wardrobe" method="_on_red_slider_value_changed"]
-[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/green_container/green_slider" to="wardrobe" method="_on_green_slider_value_changed"]
-[connection signal="value_changed" from="wardrobe/color_select_ui/VBoxContainer/blue_container/blue_slider" to="wardrobe" method="_on_blue_slider_value_changed"]
-[connection signal="text_changed" from="wardrobe/color_select_ui/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit" to="wardrobe" method="_on_line_edit_text_changed"]
-[connection signal="pressed" from="wardrobe/color_select_ui/VBoxContainer/MarginContainer/color_select_ui_done" to="wardrobe" method="_on_color_select_ui_done_pressed"]
-[connection signal="ready" from="player1/player_mesh" to="wardrobe" method="_on_player_mesh_ready"]
+[connection signal="ready" from="wardrobe/color_select_ui/TabContainer/Color & name/PanelContainer/color_panel" to="wardrobe" method="_on_color_panel_ready"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/TabContainer/Color & name/red_container/red_slider" to="wardrobe" method="_on_red_slider_value_changed"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/TabContainer/Color & name/green_container/green_slider" to="wardrobe" method="_on_green_slider_value_changed"]
+[connection signal="value_changed" from="wardrobe/color_select_ui/TabContainer/Color & name/blue_container/blue_slider" to="wardrobe" method="_on_blue_slider_value_changed"]
+[connection signal="text_changed" from="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer2/HBoxContainer/LineEdit" to="wardrobe" method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="wardrobe/color_select_ui/TabContainer/Color & name/MarginContainer/color_select_ui_done" to="wardrobe" method="_on_color_select_ui_done_pressed"]
+[connection signal="item_selected" from="wardrobe/color_select_ui/TabContainer/Hats/ScrollContainer/ItemList" to="wardrobe" method="_on_item_list_item_selected"]
+[connection signal="pressed" from="wardrobe/color_select_ui/TabContainer/Hats/MarginContainer/hats_ui_done" to="wardrobe" method="_on_hats_ui_done_pressed"]

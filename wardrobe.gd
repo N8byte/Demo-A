@@ -34,6 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not open:
 			open = true
 			%color_select_ui.visible = true
+			%wardrobe_label.visible = false
 		else:
 			open = false
 			%color_select_ui.visible = false
@@ -88,3 +89,14 @@ func _on_color_select_ui_done_pressed() -> void:
 func _on_line_edit_text_changed(new_text: String) -> void:
 	player_name = new_text
 	update_player_name()
+
+
+func _on_item_list_item_selected(index: int) -> void:
+	for child in %player_hats.get_children():
+		child.visible = false
+	if index > 0:
+		%player_hats.get_child(index - 1).visible = true
+
+
+func _on_hats_ui_done_pressed() -> void:
+	%color_select_ui.visible = false

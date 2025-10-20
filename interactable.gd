@@ -14,28 +14,27 @@ var sunk := false
 	#pass
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_action_pressed("interact") and player_here:
-		if %AnimationPlayer.is_playing():
-			return
 		if (sunk):
 			%AnimationPlayer.play('rise')
 			sunk = false
-			print('rising')
 		else:
-			%AnimationPlayer.play('sink')
+			%AnimationPlayer.play_backwards('rise')
 			%Label3D.visible = false
 			sunk = true
-			print('sinking')
+		get_viewport().set_input_as_handled()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body == %player1:
 		%Label3D.visible = true
 		player_here = true
+		%camera_animations.play('go_to_elevator')
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body == %player1:
 		%Label3D.visible = false
 		player_here = false
+		%camera_animations.play_backwards('go_to_elevator')
