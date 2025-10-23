@@ -27,17 +27,19 @@ func update_player_name() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if open:
-		#get_viewport().set_input_as_handled()
 	if event is InputEventKey && event.is_action_pressed('interact'):
 		if not player_here: return
+		get_viewport().set_input_as_handled()
 		if not open:
 			open = true
 			%color_select_ui.visible = true
 			%wardrobe_label.visible = false
+			%camera_animations.play('go_to_wardrobe')
+			%alert_label.visible = false
 		else:
 			open = false
 			%color_select_ui.visible = false
+			%camera_animations.play_backwards('go_to_wardrobe')
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -45,17 +47,17 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		player_here = true
 		%wardrobe_animations.play('open')
 		%wardrobe_label.visible = true
-		%camera_animations.play('go_to_wardrobe')
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body == %player1:
 		player_here = false
-		open = false
+		if open:
+			%camera_animations.play_backwards('go_to_wardrobe')
+			open = false
 		%color_select_ui.visible = false
 		%wardrobe_animations.play('close')
 		%wardrobe_label.visible = false
-		%camera_animations.play_backwards('go_to_wardrobe')
 
 
 func _on_color_panel_ready() -> void:
@@ -84,6 +86,7 @@ func _on_player_mesh_ready() -> void:
 
 func _on_color_select_ui_done_pressed() -> void:
 	%color_select_ui.visible = false
+	%camera_animations.play_backwards('go_to_wardrobe')
 
 
 func _on_line_edit_text_changed(new_text: String) -> void:
@@ -100,3 +103,4 @@ func _on_item_list_item_selected(index: int) -> void:
 
 func _on_hats_ui_done_pressed() -> void:
 	%color_select_ui.visible = false
+	%camera_animations.play_backwards('go_to_wardrobe')
